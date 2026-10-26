@@ -1,0 +1,335 @@
+{
+  "reviewed_at": "2026-10-25",
+  "method": "Desk research, public website inspection and repository review. No live coaching or competitor accounts tested.",
+  "recommendation": "Make the mixed training week work; treat this as a contested hypothesis.",
+  "public_sources": [
+    {
+      "id": "S01",
+      "title": "Runna: strength training",
+      "url": "https://support.runna.com/en/articles/15624879-adding-strength-training-to-your-runna-plan",
+      "type": "Official support",
+      "finding": "Documents the boundary between strength logging and running adaptation.",
+      "limit": "A documented product boundary, not a comparative performance test.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S02",
+      "title": "Runna: plan types",
+      "url": "https://support.runna.com/en/articles/15443877-how-to-create-a-training-plan-in-runna",
+      "type": "Official support",
+      "finding": "HYROX running plans exist.",
+      "limit": "Sport coverage is not full hybrid coaching.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S03",
+      "title": "Training Buddy",
+      "url": "https://trainingbuddy.ai/",
+      "type": "Vendor website · beta",
+      "finding": "Persistent context and Strava-connected conversation are explicit selling points.",
+      "limit": "Marketing claims; beta adoption and reliability unverified.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S04",
+      "title": "camu",
+      "url": "https://camu.co/",
+      "type": "Vendor website · browser inspected",
+      "finding": "HYROX coaching, proactive messages, memory and replanning are advertised.",
+      "limit": "iMessage/Telegram listed live; WhatsApp, Apple Health and WHOOP are roadmap items. No account tested.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S05",
+      "title": "HyFit",
+      "url": "https://hyfit.ai/",
+      "type": "Vendor website · browser inspected",
+      "finding": "Hybrid race analysis, programming and conversational adjustment.",
+      "limit": "No independent verification of coaching quality or retention.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S06",
+      "title": "AI Endurance: integrated coaching chat",
+      "url": "https://aiendurance.com/blog/integrated-chat-taking-ai-coaching-to-another-level",
+      "type": "Vendor-hosted user account · October 2025",
+      "finding": "Describes changes to multiple upcoming sessions through chat.",
+      "limit": "Vendor-selected experience, not an independent benchmark.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S07",
+      "title": "EnduranceAI",
+      "url": "https://www.endurancecoaching.ai/",
+      "type": "Vendor website · browser text inspected",
+      "finding": "Editable memory and a history of plan decisions are advertised.",
+      "limit": "Separate company from AI Endurance. Public text inspected; execution untested.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S08",
+      "title": "Athletica",
+      "url": "https://athletica.ai/",
+      "type": "Vendor website / FAQ",
+      "finding": "Adaptive planning, contextual coaching conversation and HYROX coverage.",
+      "limit": "FAQ distinguishes conversational advice from automatic plan control; do not generalise this to no adaptation.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S09",
+      "title": "ROXFIT",
+      "url": "https://roxfit.app/",
+      "type": "Vendor website",
+      "finding": "Race analysis, watch execution and multimodal workout creation.",
+      "limit": "These features do not establish longitudinal coaching quality.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S10",
+      "title": "Vert.run",
+      "url": "https://vert.run/",
+      "type": "Vendor website / pricing",
+      "finding": "AI and human-assisted offers coexist.",
+      "limit": "Displayed prices and entitlements may change; tax treatment is stated on site.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S11",
+      "title": "Runna pricing",
+      "url": "https://www.runna.com/",
+      "type": "Vendor website / US offer",
+      "finding": "US offer advertises $19.99 monthly or $119.99 annually.",
+      "limit": "Regional pricing varies; pricing is an anchor, not evidence of Keiko willingness to pay.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S12",
+      "title": "HYROX: multiple training tools",
+      "url": "https://www.reddit.com/r/hyrox/comments/1pozurk/what_tools_apps_do_you_use_to_prepare_for_hyrox/",
+      "type": "Public discussion",
+      "finding": "People describe combinations of running, lifting, nutrition and AI tools.",
+      "limit": "Small self-selected thread; no prevalence estimate or verified identities.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S13",
+      "title": "HYROX: combining programmes",
+      "url": "https://www.reddit.com/r/hyrox/comments/1rukoue/workout_programs/",
+      "type": "Public discussion",
+      "finding": "An athlete describes juggling a run plan, classes and lifting; replies suggest consolidated programmes or coaches.",
+      "limit": "One situation supports problem discovery, not a market-size claim.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S14",
+      "title": "Ultrarunning: value of human coaching",
+      "url": "https://www.reddit.com/r/ultrarunning/comments/1jiu89v/anyone_have_a_running_coach_is_it_worth_it/",
+      "type": "Public discussion",
+      "finding": "Accounts value judgement, continuity, accountability and a relationship.",
+      "limit": "Self-reports, selection effects and some coach promotion; outcomes not independently verified.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S15",
+      "title": "Wachholz et al., 2025",
+      "url": "https://link.springer.com/article/10.1186/s13104-025-07172-9",
+      "type": "Primary research",
+      "finding": "119-person survey and six coach interviews; evaluated example training plans.",
+      "limit": "Data collected 2024; GPT-3.5 comparison. Not a longitudinal effectiveness trial or current product comparison.",
+      "reviewed_at": "2026-10-25"
+    },
+    {
+      "id": "S16",
+      "title": "Li, Luximon & Zhang, 2023",
+      "url": "https://www.jmir.org/2023/1/e44479",
+      "type": "Primary research",
+      "finding": "Appearance and language affected social presence in 103 participants viewing triage-agent vignettes.",
+      "limit": "Health-care video setting, not athlete retention, brand preference or a swirl-avatar experiment.",
+      "reviewed_at": "2026-10-25"
+    }
+  ],
+  "internal_sources": [
+    "reports/Keiko brand positioning map.html",
+    "research_notes/Keiko brand positioning map",
+    "research_notes/Keiko coach avatar options",
+    "BRANDING.md",
+    "docs/user-personas.md",
+    "docs/architecture.md",
+    "docs/progress.md",
+    "server/agent/coachResponseContract.ts"
+  ],
+  "original_slide_coverage": [
+    {
+      "original": "00",
+      "topic": "Core promise",
+      "decision": "Reframe",
+      "v2_location": "Chapters 1, 10–11",
+      "reason": "Keep the emotional aim; lead with a concrete job."
+    },
+    {
+      "original": "01",
+      "topic": "Two aha moments",
+      "decision": "Retain / constrain",
+      "v2_location": "6, 13",
+      "reason": "Keep outside-session and modified-session stories. Remove claims that every other AI behaves differently."
+    },
+    {
+      "original": "02",
+      "topic": "Optimiser audience / HYROX",
+      "decision": "Replace",
+      "v2_location": "4–5",
+      "reason": "Define a recruitable situation; remove unsupported market size and no-competitor claim."
+    },
+    {
+      "original": "03",
+      "topic": "Message hierarchy",
+      "decision": "Revise",
+      "v2_location": "11, 16",
+      "reason": "Benefit → specific mechanism → category. Memory becomes supporting proof."
+    },
+    {
+      "original": "04",
+      "topic": "Positioning statement",
+      "decision": "Replace",
+      "v2_location": "9–10",
+      "reason": "Remove absolute promises and outdated competitor caricatures."
+    },
+    {
+      "original": "05",
+      "topic": "Archetype mix",
+      "decision": "Revise",
+      "v2_location": "14",
+      "reason": "Keep useful intent; drop pseudo-precise percentages."
+    },
+    {
+      "original": "06",
+      "topic": "Competitor archetypes",
+      "decision": "Replace",
+      "v2_location": "7–8",
+      "reason": "Describe real buying alternatives and documented capabilities."
+    },
+    {
+      "original": "07",
+      "topic": "Perceptual map",
+      "decision": "Replace",
+      "v2_location": "7, 9",
+      "reason": "No invented coordinates on honesty or trust."
+    },
+    {
+      "original": "08",
+      "topic": "Empty quadrant",
+      "decision": "Reject",
+      "v2_location": "2, 7–9",
+      "reason": "The research finds direct overlap, not empty territory."
+    },
+    {
+      "original": "09",
+      "topic": "Trait scores",
+      "decision": "Reject",
+      "v2_location": "12, 21–22",
+      "reason": "Use observable tests and scoped evidence."
+    },
+    {
+      "original": "10",
+      "topic": "Direct voice",
+      "decision": "Retain / refine",
+      "v2_location": "15",
+      "reason": "Answer first; enough context to act."
+    },
+    {
+      "original": "11",
+      "topic": "Honest voice",
+      "decision": "Retain / refine",
+      "v2_location": "12, 15",
+      "reason": "Specific uncertainty and accountable correction."
+    },
+    {
+      "original": "12",
+      "topic": "Precise voice",
+      "decision": "Retain / refine",
+      "v2_location": "12, 15",
+      "reason": "Correct facts without compulsory dashboards."
+    },
+    {
+      "original": "13",
+      "topic": "Warm voice",
+      "decision": "Retain / refine",
+      "v2_location": "14–15",
+      "reason": "Specific acknowledgement; room for joy."
+    },
+    {
+      "original": "14",
+      "topic": "Attentive voice",
+      "decision": "Retain / refine",
+      "v2_location": "14–15",
+      "reason": "Use context silently and relevantly."
+    },
+    {
+      "original": "15",
+      "topic": "Vocabulary",
+      "decision": "Revise",
+      "v2_location": "16",
+      "reason": "Retire unprovable claims; avoid arbitrary word bans."
+    },
+    {
+      "original": "16",
+      "topic": "Palette",
+      "decision": "Retain / qualify",
+      "v2_location": "17",
+      "reason": "Continuity is useful; colour distinctiveness unproved."
+    },
+    {
+      "original": "17",
+      "topic": "Motif / imagery / mascot",
+      "decision": "Revise",
+      "v2_location": "17–18",
+      "reason": "The saved week is the signature object; character remains testable."
+    },
+    {
+      "original": "18",
+      "topic": "Copy inventory",
+      "decision": "Retain / update",
+      "v2_location": "11, 16, 24",
+      "reason": "One coherent hierarchy, with capability gates."
+    },
+    {
+      "original": "19",
+      "topic": "Rollout",
+      "decision": "Replace",
+      "v2_location": "21–24",
+      "reason": "Evidence and acceptance criteria replace calendar promises."
+    },
+    {
+      "original": "20",
+      "topic": "Evidence",
+      "decision": "Rebuild",
+      "v2_location": "3, 25–26",
+      "reason": "Separate documented claims, judgement and missing validation."
+    }
+  ],
+  "limitations": [
+    "No representative demand survey",
+    "No hands-on product comparison",
+    "No current deployment verification",
+    "No coaching efficacy or injury outcome study",
+    "No willingness-to-pay results",
+    "No trademark clearance"
+  ],
+  "checks_pending": [],
+  "verification": {
+    "desktop_width": 1280,
+    "mobile_width": 390,
+    "chapter_groups_checked": 8,
+    "chapters_in_full_view": 27,
+    "duplicate_ids": 0,
+    "page_horizontal_overflow": false,
+    "inline_preview": [
+      "728px dark",
+      "390px light"
+    ],
+    "navigation_and_reading_theme": "passed",
+    "embedded_avatar_loaded": true,
+    "application_changes": "None; static research deck only"
+  },
+  "publication_approval": "User explicitly approved commit and deployment."
+}
