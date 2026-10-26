@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Keiko — Brand positioning</title>
+<style>
+  :root{
+    --bg:#10120F; --bg2:#191C17; --bg3:#252A21; --line:#2E342A;
+    --ink:#F2F4EC; --ink2:#C3CAB6; --ink3:#8E977F;
+    --lime:#D9FF7A; --lime-dim:#9DBF4A; --olive:#718052; --paper:#FCFCF9;
+    --good:#2F6B3A; --bad:#7A2E2A;
+    --sans:"Sora","Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--bg);color:var(--ink);font-family:var(--sans);scroll-behavior:smooth}
+  body{margin:0;line-height:1.5;font-size:18px}
+  a{color:inherit}
+
+  /* progress + nav */
+  .topbar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--bg3);z-index:20}
+  .topbar i{display:block;height:100%;width:0;background:var(--lime)}
+  nav.side{position:fixed;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:20}
+  nav.side a{width:8px;height:8px;border-radius:50%;background:var(--line);display:block;position:relative}
+  nav.side a.on{background:var(--lime);transform:scale(1.3)}
+  nav.side a span{position:absolute;right:18px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:12px;color:var(--ink3);opacity:0;pointer-events:none;transition:opacity .15s}
+  nav.side a:hover span{opacity:1}
+  .hint{position:fixed;left:24px;bottom:18px;font-size:12px;color:var(--ink3);z-index:20}
+  .hint kbd{font-family:var(--mono);border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:11px}
+
+  /* slides */
+  section.slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:72px 8vw;border-bottom:1px solid var(--line);position:relative}
+  .slide .inner{max-width:1120px;width:100%;margin:0 auto}
+  .k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:18px;display:flex;gap:12px;align-items:center}
+  .k .num{color:var(--ink3)}
+  h1{font-size:clamp(44px,7vw,92px);line-height:.98;letter-spacing:-.03em;margin:0 0 26px;font-weight:700}
+  h2{font-size:clamp(32px,4.2vw,54px);line-height:1.05;letter-spacing:-.025em;margin:0 0 28px;font-weight:700}
+  h3{font-size:22px;margin:0 0 10px;letter-spacing:-.01em}
+  p{margin:0 0 14px;max-width:72ch}
+  .lead{font-size:clamp(20px,2vw,26px);color:var(--ink2);line-height:1.4}
+  .dim{color:var(--ink3)}
+  .sm{font-size:15px}
+  .mono{font-family:var(--mono);font-size:.9em}
+  .tag{display:inline-block;font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 9px;border-radius:6px;margin-left:8px;vertical-align:middle}
+  .tag.v{background:#223B28;color:#B9F0C2}.tag.j{background:#4A3A10;color:#FFE3A1}.tag.i{background:var(--bg3);color:var(--ink2)}
+
+  .cols{display:grid;gap:28px}
+  .c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:repeat(3,1fr)}
+  .box{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .box.lime{border-color:var(--lime);background:#171B10}
+  .big{font-size:clamp(26px,3vw,38px);line-height:1.25;letter-spacing:-.015em;font-weight:600}
+  blockquote.pos{margin:0;font-size:clamp(24px,2.8vw,40px);line-height:1.3;letter-spacing:-.015em;font-weight:500;color:var(--ink)}
+  blockquote.pos b{color:var(--lime);font-weight:600}
+  ul.clean{list-style:none;padding:0;margin:0}
+  ul.clean li{padding:10px 0;border-top:1px solid var(--line);display:flex;gap:14px}
+  ul.clean li:first-child{border-top:0}
+  ul.clean li::before{content:"—";color:var(--lime);flex:0 0 auto}
+  .bar{display:flex;height:22px;border-radius:11px;overflow:hidden;gap:3px;margin:10px 0 28px}
+  .bar div{display:flex;align-items:center;justify-content:center;font:600 12px var(--mono);color:var(--bg)}
+
+  table{width:100%;border-collapse:collapse;font-size:16px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+  td b{color:var(--lime);font-weight:600}
+  tr.me td{background:#171B10}
+
+  /* voice */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
+  .ex{border-radius:14px;padding:24px 26px;font-size:19px;line-height:1.45;position:relative}
+  .ex.good{background:#16200F;border:1px solid #3A5222}
+  .ex.bad{background:#20120F;border:1px solid #5A2A24}
+  .ex .lab{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+  .ex.good .lab{color:#B9F0C2}.ex.bad .lab{color:#F2B8B0}
+  .rule{margin-top:22px;font-size:15px;color:var(--ink3)}
+  .rule code{font-family:var(--mono);color:var(--ink2);font-size:13px}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:16px;margin:0 8px 10px 0}
+  .pill.use{border-color:var(--lime-dim);color:var(--ink)}.pill.no{text-decoration:line-through;color:var(--ink3)}
+
+  /* palette */
+  .sw{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .sw div{border-radius:14px;height:120px;border:1px solid var(--line);position:relative;padding:14px;display:flex;flex-direction:column;justify-content:flex-end}
+  .sw small{font:500 12px var(--mono);opacity:.8}
+  .sw span{font-size:14px;font-weight:600}
+  .retired::after{content:"RETIRE";position:absolute;top:12px;right:12px;font:700 10px var(--mono);letter-spacing:.1em;background:#000;color:#fff;padding:4px 7px;border-radius:5px}
+  .mock{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px 24px;font-size:17px}
+  .mock .l{font:600 11px var(--mono);letter-spacing:.12em;color:var(--ink3);margin-bottom:6px}
+  .mock .why{border-left:3px solid var(--lime);padding-left:14px;margin-top:14px;color:var(--ink2);font-size:16px}
+  .mock .conf{display:inline-block;margin-top:14px;font:500 12px var(--mono);color:var(--lime);border:1px solid #3a4530;border-radius:999px;padding:5px 11px}
+  .mock.light{background:var(--paper);color:#1d2118;border-color:#e3e4dc}
+  .mock.light .l{color:#6b7360}.mock.light .why{border-color:var(--olive);color:#3b4332}.mock.light .conf{color:#536038;border-color:#cfd3c4}
+
+  /* map */
+  .mapbox{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:18px;position:relative}
+  svg text{font-family:var(--sans)}
+  .dot{cursor:pointer}
+  .tip{position:absolute;pointer-events:none;background:var(--bg3);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;max-width:300px;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;transition:opacity .12s;z-index:5}
+  .heat td{padding:8px 6px;text-align:center}
+  .heat td:first-child{text-align:left;white-space:nowrap;padding-left:0}
+  .heat th{text-align:center;font-size:11px;letter-spacing:.04em;line-height:1.2;padding:8px 4px}
+  .heat th:first-child{text-align:left;padding-left:0}
+  .heat .cell{display:inline-block;min-width:34px;height:30px;line-height:30px;border-radius:7px;font-weight:600;font-size:15px}
+
+  @media (max-width:860px){
+    body{font-size:16px}
+    section.slide{padding:64px 6vw;min-height:auto}
+    .c2,.c3,.pair,.sw{grid-template-columns:1fr}
+    nav.side,.hint{display:none}
+    table{font-size:14px} th,td{padding:9px 8px}
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><i id="prog"></i></div>
+<nav class="side" id="dots"></nav>
+<div class="hint"><kbd>↓</kbd> <kbd>space</kbd> next slide</div>
+
+<!-- 1 TITLE -->
+<section class="slide" id="s1">
+  <div class="inner">
+    <div class="k"><span class="num">00</span>Keiko Coach · brand positioning · Oct 2026</div>
+    <h1>A coach that<br>knows you.</h1>
+    <p class="lead">The brand idea, the archetype, the perceptual map, the voice, the visual system and what to fix — built from 4 research notes, 18 competitors, Keiko's own prompt rules, and the moment it clicks for a real athlete.</p>
+    <p class="dim sm" style="margin-top:28px">Labels on each slide: <span class="tag v">verified</span> read from the repo or competitor copy · <span class="tag j">judgement</span> researcher placement, to validate with athletes · <span class="tag i">inferred</span> from indirect evidence</p>
+  </div>
+</section>
+
+<!-- 1b THE AHA MOMENT -->
+<section class="slide" id="s1b">
+  <div class="inner">
+    <div class="k"><span class="num">01</span>The aha moment <span class="tag v">founder account</span></div>
+    <h2>Two moments where it clicks.</h2>
+    <div class="cols c2">
+      <div class="box lime">
+        <div class="dim sm" style="margin-bottom:10px">1 · Send it anything, it fits it into <em>your</em> plan</div>
+        <p class="big" style="font-size:clamp(19px,2vw,26px);font-weight:500;line-height:1.35;max-width:none">A friend sends you his session. You screenshot it to Keiko: <em>"Dude, can I do this? Does it fit my plan?"</em></p>
+        <p class="sm" style="margin-top:14px;color:var(--ink2)">It already knows you have a race Saturday. It knows your week, your goal, your injury. It restructures the plan around his session with the right adjustments — and you know exactly what to do and when.</p>
+      </div>
+      <div class="box lime">
+        <div class="dim sm" style="margin-bottom:10px">2 · It backs the smart call, not the big number</div>
+        <p class="big" style="font-size:clamp(19px,2vw,26px);font-weight:500;line-height:1.35;max-width:none">Planned 18 km. You felt it and stopped at 14. Keiko: <em>good call slowing down</em> — the week's volume was already too high.</p>
+        <p class="sm" style="margin-top:14px;color:var(--ink2)">Every other AI would have praised the kilometres. This one praised the judgement, because it knew the load. You felt it was right; the coach confirmed it. That's trust.</p>
+      </div>
+    </div>
+    <ul class="clean" style="margin-top:26px;columns:2;column-gap:40px">
+      <li><b style="color:var(--lime)">Conversational, not a block.</b> Sessions, screenshots, how you feel — the plan moves with you.</li>
+      <li><b style="color:var(--lime)">It knows you.</b> Race, goal, constraints, load, history — remembered, not re-asked.</li>
+      <li><b style="color:var(--lime)">You always know what to do.</b> A decision, not a dashboard.</li>
+      <li><b style="color:var(--lime)">It's honest about effort.</b> Praise goes to the right decision, not the bigger number.</li>
+    </ul>
+    <p class="dim sm" style="margin-top:18px">This is what competitors' "adaptive" doesn't mean. Theirs is a template recalculating after a missed run. Keiko adapts in conversation, with context — and tells you the truth about it.</p>
+  </div>
+</section>
+
+<!-- 2 THE IDEA -->
+<section class="slide" id="s2">
+  <div class="inner">
+    <div class="k"><span class="num">02</span>The idea</div>
+    <h2>One organising idea. One tagline. One descriptor.</h2>
+    <div class="cols c3">
+      <div class="box lime">
+        <div class="dim sm">Brand idea</div>
+        <div class="big">A coach that knows you.</div>
+        <p class="sm dim" style="margin-top:14px">The promise the athlete feels: you talk, it remembers, it adapts, you know what to do. "Shows its work" is the proof underneath — arithmetic in the open, review basis + confidence on every card.</p>
+      </div>
+      <div class="box">
+        <div class="dim sm">Public tagline <span class="tag v">verified</span></div>
+        <div class="big">Training that remembers.</div>
+        <p class="sm dim" style="margin-top:14px">Already on every email and the onboarding. Memory is the mechanism behind "knows you" — keep it.</p>
+      </div>
+      <div class="box">
+        <div class="dim sm">Descriptor — everywhere, verbatim</div>
+        <div class="big mono" style="font-size:22px">Keiko · AI coach for running &amp; HYROX</div>
+        <p class="sm dim" style="margin-top:14px">Already your Strava stamp. Discloses AI plainly without making it the headline. Replaces four competing descriptors in the repo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 POSITIONING -->
+<section class="slide" id="s3">
+  <div class="inner">
+    <div class="k"><span class="num">03</span>Positioning statement <span class="tag j">judgement</span></div>
+    <blockquote class="pos">For <b>self-coached runners, and the HYROX athletes among them,</b> Keiko is <b>the coach you talk to.</b> Send it anything — a friend's session, a new race, a sore calf — and it <b>fits it into your plan, remembering your goal, your constraints and your history,</b> so you always know what to do and when. Unlike plan apps that recalculate a template and chat assistants that forget you, it <b>works from your real training record, never invents a number, never flatters you, and shows the reasoning behind every change.</b></blockquote>
+    <p class="dim sm" style="margin-top:36px">Onlyness test: swap in Runna, Athletica, Strava or ChatGPT — each has a documented review that contradicts this sentence. We still avoid the word "adaptive" (8 competitors claim it) and say what it actually is: a conversation with a coach who remembers.</p>
+  </div>
+</section>
+
+<!-- 4 ARCHETYPE -->
+<section class="slide" id="s4">
+  <div class="inner">
+    <div class="k"><span class="num">04</span>Personality</div>
+    <h2>70% Sage, 30% Caregiver — spoken like a coach who texts.</h2>
+    <div class="bar"><div style="flex:70;background:var(--lime)">SAGE 70</div><div style="flex:30;background:var(--olive);color:#fff">CAREGIVER 30</div></div>
+    <div class="cols c3">
+      <div class="box"><h3>Sage</h3><p class="sm">Analytical, objective, truth-seeking. This is the job athletes hire a coach for: <em>"be my brain"</em>, fix the tendencies they can't see themselves.</p></div>
+      <div class="box"><h3>Caregiver</h3><p class="sm">Protection from the athlete's own tendencies, no guilt mechanics. Stops the Sage reading cold. Already in the prompts: <em>"concise, warm, and direct"</em>; a 12-word cap on praise.</p></div>
+      <div class="box"><h3>Everyman — register only</h3><p class="sm">Not a third archetype. It's <em>how</em> the Sage speaks: plain words, no jargon, never mentions "the software behind the coach".</p></div>
+    </div>
+    <p class="dim sm" style="margin-top:24px">Guardrail: Tracksmith's "quiet expert" slid into elitism (~1,500 angry comments). Be expert about the athlete's <em>data</em>, never about the athlete's worth.</p>
+  </div>
+</section>
+
+<!-- 5 ARCHETYPE LANDSCAPE -->
+<section class="slide" id="s5">
+  <div class="inner">
+    <div class="k"><span class="num">05</span>Who sits where <span class="tag j">judgement</span></div>
+    <h2>Sports tech is full of Heroes. Nobody is the Sage who explains.</h2>
+    <table>
+      <tr><th style="width:140px">Archetype</th><th>Brands</th><th style="width:38%">Keiko</th></tr>
+      <tr><td>Hero</td><td>Nike, COROS, WHOOP, Roxfit, Centr</td><td>Avoid. The crowded default; the "crushing it" voice athletes mock.</td></tr>
+      <tr><td>Ruler</td><td>TrainingPeaks, Garmin</td><td>Avoid. Dashboards are a PRODUCT.md anti-reference.</td></tr>
+      <tr><td>Magician</td><td>Humango ("Hugo"), Running Genie, ChatGPT</td><td>Avoid. AI-as-magic is the posture reviews punish hardest.</td></tr>
+      <tr><td>Everyman</td><td>Runna, Strava</td><td>Borrow the register, not the position.</td></tr>
+      <tr><td>Caregiver</td><td>Oura · Headspace (outside sport)</td><td><b>Secondary, 30%</b></td></tr>
+      <tr><td>Sage</td><td>Athletica, TrainAsONE, Intervals.icu</td><td><b>Primary, 70%</b> — but the Sage that shows its work. Athletica/TrainAsONE reviews: "unclear why it adjusted".</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 6 MAP -->
+<section class="slide" id="s6">
+  <div class="inner">
+    <div class="k"><span class="num">06</span>Perceptual map <span class="tag j">judgement</span></div>
+    <h2 style="font-size:clamp(26px,3vw,40px)">Reports → Coaches &nbsp;×&nbsp; Performs confidence → Earns trust</h2>
+    <div class="mapbox" id="mapcard">
+      <svg id="mapsvg" viewBox="0 0 1000 620" width="100%" style="display:block;height:auto"></svg>
+      <div class="tip" id="tip"></div>
+    </div>
+    <p class="dim sm" style="margin-top:14px">Hover a point for the placement reason. Coordinates come from verified copy and reviews but are researcher judgement — the plan validates them with five pilot athletes.</p>
+  </div>
+</section>
+
+<!-- 7 WHAT THE MAP SAYS -->
+<section class="slide" id="s7">
+  <div class="inner">
+    <div class="k"><span class="num">07</span>What the map says</div>
+    <h2>Intervals.icu's trust posture, doing Runna's job.</h2>
+    <div class="cols c3">
+      <div class="box"><h3>Bottom-right · 9 brands</h3><p class="sm">Coaches you <em>and</em> performs confidence. Every AI-first challenger plus the market leader. Strava's CEO calls AI plan generators "a dime a dozen".</p></div>
+      <div class="box"><h3>Top-left · 3 brands</h3><p class="sm">Earns trust but only reports. Intervals.icu, TrainingPeaks, COROS — what serious runners respect for honesty. None of them coach.</p></div>
+      <div class="box lime"><h3>Top-right · Keiko</h3><p class="sm">Nearly empty. Vert.run is closest but earns trust with human coaches at $33–45/mo, trail only. Athletica sits on the line and drops once its reviews are weighed.</p></div>
+    </div>
+    <p class="dim sm" style="margin-top:24px">The honest caveat: an empty quadrant isn't automatically valuable. One Austrian pilot found athletes trusted a <em>polished</em> AI plan more than a human one. Keiko's hedge is that its honesty is structural — fail-closed saves, confidence lines — so it costs nothing extra if "honesty" doesn't sell as a word.</p>
+  </div>
+</section>
+
+<!-- 8 TRAITS -->
+<section class="slide" id="s8">
+  <div class="inner">
+    <div class="k"><span class="num">08</span>Trait scores, 1–5 <span class="tag j">judgement</span></div>
+    <h2 style="font-size:clamp(26px,3vw,40px)">Keiko is the only coach above 4 on "Remembers you" and "Honest".</h2>
+    <div style="overflow-x:auto"><table class="heat" id="heat"></table></div>
+    <p class="dim sm" style="margin-top:14px">* = enforced in prompt and code, not yet measured with athletes. Deliberately low: Social (Strava owns it), Fun (we're a Sage), Beginner (Runna and NRC own "first 5K").</p>
+  </div>
+</section>
+
+<!-- 9-13 VOICE -->
+<section class="slide" id="s9">
+  <div class="inner">
+    <div class="k"><span class="num">09</span>Voice · 1 of 5 <span class="tag v">rules verified</span></div>
+    <h2>Direct, not curt.</h2>
+    <div class="pair">
+      <div class="ex good"><div class="lab">Good · real eval output</div>Updated your schedule for today to prioritize recovery after yesterday's 15.1 km long run. — Sunday, Sep 27: Full rest. Take the day completely off — no make-up work needed.</div>
+      <div class="ex bad"><div class="lab">Bad</div>Great question! Let's take a look at where you are this week. You asked whether you should still do Sunday's session, and there are a few things to consider here. First, yesterday you ran 15.1 km, which is a significant effort…</div>
+    </div>
+    <p class="rule">Rule in <code>coachResponseContract.ts</code>: "Answer the current ask in the first sentence. Do not repeat the question." &nbsp;·&nbsp; Complaint it answers: "300–600 word responses for yes/no questions".</p>
+  </div>
+</section>
+
+<section class="slide" id="s10">
+  <div class="inner">
+    <div class="k"><span class="num">10</span>Voice · 2 of 5</div>
+    <h2>Honest, not harsh.</h2>
+    <div class="pair">
+      <div class="ex good"><div class="lab">Good</div>A 1:20 at Hamburg is not on the table from this block. Your last two sims put compromised-running pace at 4:38/km and the 1:20 line needs roughly 4:10. Twelve weeks closes some of that gap, not all of it. 1:28–1:31 is the honest range; here is how I got there.</div>
+      <div class="ex bad"><div class="lab">Bad</div>Love the ambition! A sub-1:20 is absolutely within reach if we stay consistent and trust the process. Let's crush it together!</div>
+    </div>
+    <p class="rule">Rule: "Be direct. No filler, no cheerleading. Push back when the logs warrant it." &nbsp;·&nbsp; Complaint: an athlete had to type <em>"but be realistic does it make sense?"</em></p>
+  </div>
+</section>
+
+<section class="slide" id="s11">
+  <div class="inner">
+    <div class="k"><span class="num">11</span>Voice · 3 of 5</div>
+    <h2>Precise, not a dashboard.</h2>
+    <div class="pair">
+      <div class="ex good"><div class="lab">Good</div>Target for the 3 × 2 km: 4:05/km. That is your 10 km race pace from Sep 14 (41:12 → 4:07/km) minus 2 s/km for the shorter reps. Hold the first rep at 4:08; it is easier to speed up than to rescue the third.</div>
+      <div class="ex bad"><div class="lab">Bad</div>Your aerobic efficiency index rose 3.2% while cardiac drift fell to 4.1% and training stress balance sits at −18 with an acute:chronic ratio of 1.27, suggesting strong adaptation. Your VO2max estimate is 54.</div>
+    </div>
+    <p class="rule">Rule: "Show your arithmetic for every time/pace/gap calculation." &nbsp;·&nbsp; Complaint: a 1:28 PB recalled as 1:33 and cascaded into every pace; "false precision" on station estimates.</p>
+  </div>
+</section>
+
+<section class="slide" id="s12">
+  <div class="inner">
+    <div class="k"><span class="num">12</span>Voice · 4 of 5</div>
+    <h2>Warm, not a cheerleader.</h2>
+    <div class="pair">
+      <div class="ex good"><div class="lab">Good · real fixture</div>That was a well-controlled threshold session. You delivered the intended aerobic-pressure stimulus without turning it into a race. Keep the next easy session genuinely easy.</div>
+      <div class="ex bad"><div class="lab">Bad</div>Amazing work today, superstar! You absolutely smashed that threshold session and should be so proud of yourself. Every step is progress. Keep shining!</div>
+    </div>
+    <p class="rule">Rule: acknowledgement ≤ 12 words; "Reserve praise for genuinely noteworthy decisions"; "Faster or harder than plan is a deviation, not automatically a success." &nbsp;·&nbsp; Complaint: "Great question!", "Excellent decision!", "That shows real self-awareness!" &nbsp;·&nbsp; Lived example: the athlete cut an 18 km run to 14 km and the coach backed the decision because the week's volume was already too high — praise for judgement, not for kilometres.</p>
+  </div>
+</section>
+
+<section class="slide" id="s13">
+  <div class="inner">
+    <div class="k"><span class="num">13</span>Voice · 5 of 5</div>
+    <h2>Attentive, not needy.</h2>
+    <div class="pair">
+      <div class="ex good"><div class="lab">Good · real eval output</div>Adjusted today's Sunday workout to match your 60-minute cap and follow yesterday's 15.1 km run. Easy run: 50 min continuous (~9 km), HR below 150 bpm. Keep the effort fully aerobic and capped at 50 minutes.</div>
+      <div class="ex bad"><div class="lab">Bad</div>Here's a 70-minute progression run for Sunday! Let me know how it goes, and if you want, I can also put together a nutrition plan for the week, or we could look at your shoe rotation. Would you like me to do that?</div>
+    </div>
+    <p class="rule">Rule: "End when the coaching is delivered. Do NOT close with engagement questions." &nbsp;·&nbsp; Complaint: "If you want, I can…" endings in 90% of replies; forgot "can't run Saturday" in the same session.</p>
+  </div>
+</section>
+
+<!-- 14 VOCAB -->
+<section class="slide" id="s14">
+  <div class="inner">
+    <div class="k"><span class="num">14</span>Vocabulary</div>
+    <h2>Words we use. Words we retire.</h2>
+    <div class="cols c2">
+      <div>
+        <h3 class="dim">Use — the community already says them</h3>
+        <span class="pill use">compromised running</span><span class="pill use">sim</span><span class="pill use">engine</span><span class="pill use">evidence</span><span class="pill use">record</span><span class="pill use">remembers</span><span class="pill use">shows its work</span>
+      </div>
+      <div>
+        <h3 class="dim">Retire — crowded or distrusted</h3>
+        <span class="pill no">adaptive</span><span class="pill no">personalised</span><span class="pill no">hyper-personalised</span><span class="pill no">AI-powered (as a lead)</span><span class="pill no">crush</span><span class="pill no">smash</span><span class="pill no">unlock</span><span class="pill no">neural</span><span class="pill no">#1</span>
+      </div>
+    </div>
+    <p class="dim sm" style="margin-top:30px">Voice stays constant; tone follows the athlete's state — the lesson of Strava's <em>"hope you're okay after that car accident… keep up the great work!"</em> Default: keep a straight face. One sanctioned exception: "NEAR-FLAWLESS WEEK" on the share card, rare and evidence-triggered.</p>
+  </div>
+</section>
+
+<!-- 15 VISUAL -->
+<section class="slide" id="s15">
+  <div class="inner">
+    <div class="k"><span class="num">15</span>Visual system <span class="tag i">inferred</span></div>
+    <h2>Dark warm-olive + soft lime. Retire acid lime. Light olive becomes a reading theme.</h2>
+    <h3 class="dim sm" style="margin-top:10px">Brand — adopt (already live on 5 of 6 surfaces)</h3>
+    <div class="sw">
+      <div style="background:#10120F"><span>Canvas</span><small>#10120F</small></div>
+      <div style="background:#191C17"><span>Surface</span><small>#191C17</small></div>
+      <div style="background:#252A21"><span>Raised</span><small>#252A21</small></div>
+      <div style="background:#D9FF7A;color:#10120F"><span>Accent · ≤10% of any surface</span><small>#D9FF7A</small></div>
+    </div>
+    <h3 class="dim sm" style="margin-top:26px">Reading theme — keep for long text and the email card. Not the brand.</h3>
+    <div class="sw">
+      <div style="background:#FCFCF9;color:#1d2118"><span>Paper</span><small>#FCFCF9</small></div>
+      <div style="background:#718052;color:#fff"><span>Olive</span><small>#718052</small></div>
+      <div style="background:#536038;color:#fff"><span>Olive deep</span><small>#536038</small></div>
+      <div class="retired" style="background:#CCFF00;color:#10120F"><span>Acid lime · 23 web files</span><small>#CCFF00</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 MOTIF -->
+<section class="slide" id="s16">
+  <div class="inner">
+    <div class="k"><span class="num">16</span>The owned motif</div>
+    <h2>The reasoning block is the brand idea, rendered.</h2>
+    <div class="cols c2">
+      <div>
+        <div class="mock">
+          <div class="l">TUESDAY · KEY SESSION</div>
+          <div><b>3 × 2 km @ 4:05/km</b> · 90 s jog</div>
+          <div class="why"><b>Why this session</b><br>10 km race pace from Sep 14 (41:12 → 4:07/km) − 2 s/km for shorter reps. Hold rep 1 at 4:08.</div>
+          <span class="conf">Review basis: 2 sims, 1 race · Confidence: high</span>
+        </div>
+        <div class="mock light" style="margin-top:14px">
+          <div class="l">READING THEME · WEEKLY REVIEW</div>
+          <div><b>Week 42 · 4 of 5 sessions as planned</b></div>
+          <div class="why"><b>The one fix</b><br>Thursday's easy run drifted to 4:55/km — 20 s faster than cap. Protect the easy days before the sim block.</div>
+          <span class="conf">Review basis: Strava + your notes · Confidence: medium</span>
+        </div>
+      </div>
+      <ul class="clean sm">
+        <li>Small brands win with one UI motif competitors end up copying (Linear's status circles). Ours: the "why" line + review basis + confidence, on every surface.</li>
+        <li>Warm neutrals separate Keiko from WHOOP's #0B0B0B and Strava's black.</li>
+        <li>Accent is for progress and state — never fills, never gradients.</li>
+        <li>Sora stays. Weight contrast and lowercase labels; uppercase tracking is WHOOP's signature.</li>
+        <li>No orange near the mark — it reads as a Strava satellite.</li>
+        <li>Drop the coach-face avatar in chat; mascots are the Magician tell. Bare swirl only.</li>
+        <li>Imagery: ordinary adults mid-week. A Tuesday easy run, a sled in a quiet gym. Never race-day elites.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 17 COPY FIXES -->
+<section class="slide" id="s17">
+  <div class="inner">
+    <div class="k"><span class="num">17</span>Copy to fix <span class="tag v">verified</span></div>
+    <h2 style="font-size:clamp(26px,3vw,40px)">Three copy eras and four descriptors in the repo. Collapse to one.</h2>
+    <table>
+      <tr><th style="width:26%">Where</th><th>Now</th><th style="width:36%">Fix</th></tr>
+      <tr><td class="mono">metadata.json</td><td>"AI Workout Co-Pilo" · "inspired by Oura aesthetics"</td><td>"Keiko Coach" · descriptor + tagline</td></tr>
+      <tr><td class="mono">index.html &lt;title&gt;</td><td>"Adaptive Training Coach" — the most crowded claim in the category</td><td>"Keiko | AI coach for running &amp; HYROX"</td></tr>
+      <tr><td class="mono">LandingPage.tsx</td><td>Same descriptor; HYROX absent from the whole page</td><td>Descriptor + one HYROX "Keiko at work" scenario; hero line becomes the positioning sentence</td></tr>
+      <tr><td class="mono">lib/landingCopy.ts</td><td>Dead file: "The Neural Performance Coach", "Ready to take the Leap?"</td><td>Delete</td></tr>
+      <tr><td class="mono">BRANDING.md</td><td>"AI-powered training coach for athletes"; #CCFF00 primary; tone = 4 bullets</td><td>Descriptor; #D9FF7A + warm neutrals; the five voice traits</td></tr>
+      <tr><td class="mono">DESIGN.md</td><td>Light tokens as "the mobile system" — stale since 2026-10-10</td><td>Retitle "Reading theme"; dark tokens as default</td></tr>
+      <tr><td class="mono">GroundedChat.tsx</td><td>Coach-face avatar in chat vs PRODUCT.md "no avatars"</td><td>Remove from chat</td></tr>
+      <tr><td class="mono">Telegram /start · App Store</td><td>No written welcome; no listing copy at all</td><td>Three sentences in voice; subtitle "Running &amp; HYROX coach"</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 18 PLAN -->
+<section class="slide" id="s18">
+  <div class="inner">
+    <div class="k"><span class="num">18</span>Two weeks, two people</div>
+    <h2>Nothing here is a new feature. It's writing down what the product already does.</h2>
+    <table>
+      <tr><th style="width:90px">Days</th><th>A · brand &amp; copy</th><th>B · code &amp; visuals</th></tr>
+      <tr><td>1–2</td><td>Rewrite BRANDING.md: positioning, idea, archetype, five voice traits with examples, vocabulary, descriptor</td><td>Retire #CCFF00 (CSS var + 23-file sweep); delete landingCopy.ts</td></tr>
+      <tr><td>3–4</td><td>Fix metadata.json, index.html, landing descriptor and hero; draft Telegram /start and App Store copy</td><td>DESIGN.md → reading theme + dark defaults; remove chat avatar</td></tr>
+      <tr><td>5</td><td colspan="2">Checkpoint — read every live surface aloud against the five traits; log deviations</td></tr>
+      <tr><td>6–8</td><td>HYROX scenario on landing; write-back settings copy; one paragraph "why we show our work"</td><td>"Review basis / Confidence" row on the mobile scorecard; HYROX in App Store keywords</td></tr>
+      <tr><td>9–10</td><td>Interview five pilot athletes: place Keiko + two apps on the map; react to "Shows its work" vs "Training that remembers."</td><td>Three Instagram-Story cards from real pilot weeks in the final palette</td></tr>
+      <tr><td>11–12</td><td colspan="2">Checkpoint — adjust from interviews; freeze BRANDING.md; ADR recording the palette decision</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 19 EVIDENCE -->
+<section class="slide" id="s19">
+  <div class="inner">
+    <div class="k"><span class="num">19</span>How much to trust this</div>
+    <h2>Strongest: Keiko's own rules. Weakest: the map coordinates.</h2>
+    <div class="cols c3">
+      <div class="box"><h3><span class="tag v" style="margin:0">verified</span></h3><ul class="clean sm"><li>Keiko prompt rules, strings, palettes, copy eras — read from the repo</li><li>Competitor taglines, AI framing, prices — fetched Oct 2026</li><li>Complaint quotes — real, but small samples (21–46 reviews per app)</li></ul></div>
+      <div class="box"><h3><span class="tag j" style="margin:0">judgement</span></h3><ul class="clean sm"><li>Archetype assignments</li><li>Every map coordinate</li><li>Every trait score — Keiko's describe enforced intent, not athlete perception</li></ul></div>
+      <div class="box"><h3><span class="tag i" style="margin:0">inferred</span></h3><ul class="clean sm"><li>"AI label lowers trust" — one controlled study, not fitness-specific</li><li>"Black + lime is a cliché" — colour-guide warnings only; WHOOP's accent is actually teal</li><li>"Empty quadrant is valuable" — contested by the Austrian pilot</li></ul></div>
+    </div>
+    <p class="dim sm" style="margin-top:28px">Reddit was unreachable, so athlete quotes skew Slowtwitch/triathlon. Full sources: <span class="mono">reports/Keiko brand positioning map.md</span></p>
+  </div>
+</section>
+
+<script>
+/* ---------- perceptual map ---------- */
+const brands=[
+ ["Keiko",4,5,"Prescribes and revises the week; shows arithmetic, declares review basis + confidence, fails closed on unsaved claims, draft-until-approved.",true],
+ ["Vert.run",3,2,"Human coaches, 'real coach in your pocket'; AI sold as a tier; a coach who 'went silent for weeks'."],
+ ["Athletica",4,1,"'You're always in control', sports-science credentials; but 'unclear why it adjusted', 'too much load'."],
+ ["Runna",4,-1,"'#1 rated', 'Real coaching from real runners'; 'pretty much the same plan for everyone'."],
+ ["TrainAsONE",5,-2,"'The last coach you'll ever need', 'Multi-Award Winning'; 'unexplained assessment'."],
+ ["Humango",4,-3,"'That one coach who's always right', named AI 'Hugo'."],
+ ["Running Genie",3,-3,"Genie mascot, 'Let your favorite AI do the thinking', 'Nailed it!'"],
+ ["Centr HYROX",3,-3,"Celebrity-led 12-week programmes; 'not much variation between workouts'."],
+ ["ChatGPT",3,-4,"Will prescribe anything; 'a great sycophant'; calendar errors; invented paces."],
+ ["Nike Run Club",2,-4,"Guided runs; 'virtual high five'; speed coaches 'robotic, and repetitive'."],
+ ["HYROX Training+",2,-1,"Official, gym-embedded template programming."],
+ ["WHOOP Coach",0,-5,"Advisor not coach; 'Powered by OpenAI', fabricated data, 'legit slop'."],
+ ["Roxfit",-1,0,"Race-day tooling; builds workouts from a photo; utility register."],
+ ["Oura Advisor",-2,0,"'General wellness only', calm; homepage omits Advisor."],
+ ["Garmin Connect+",-3,-2,"'Powered by AI… in beta'; insights 'hilariously generic'."],
+ ["Strava AI",-4,-3,"Post-activity summaries; 'crushing it' to everyone; crash-victim message."],
+ ["COROS Hub",-2,2,"No AI claims, 'predictive analytics', free; 'estimation is very flawed'."],
+ ["TrainingPeaks",-3,3,"No AI claims; complete platform for coaches; 'stagnated… about five years'."],
+ ["Intervals.icu",-5,5,"Free, founder answers the forum, 'a geek's dream'; no coaching."],
+];
+const W=1000,H=620,P={l:70,r:90,t:52,b:64};
+const px=x=>P.l+(x+5.6)/11.2*(W-P.l-P.r), py=y=>P.t+(5.6-y)/11.2*(H-P.t-P.b);
+const ink='#F2F4EC',ink3='#8E977F',line='#2E342A',lime='#D9FF7A',card='#191C17';
+let s='';
+[[px(0),P.t,px(5.6)-px(0),py(0)-P.t,.06],[P.l,P.t,px(0)-P.l,py(0)-P.t,.03],[P.l,py(0),px(0)-P.l,py(-5.6)-py(0),.03],[px(0),py(0),px(5.6)-px(0),py(-5.6)-py(0),.10]]
+ .forEach(([x,y,w,h,o])=>s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${lime}" opacity="${o}"/>`);
+for(let v=-5;v<=5;v++){s+=`<line x1="${px(v)}" y1="${P.t}" x2="${px(v)}" y2="${H-P.b}" stroke="${line}"/><line x1="${P.l}" y1="${py(v)}" x2="${W-P.r}" y2="${py(v)}" stroke="${line}"/>`;}
+s+=`<line x1="${px(0)}" y1="${P.t}" x2="${px(0)}" y2="${H-P.b}" stroke="${ink3}" stroke-width="1.5"/><line x1="${P.l}" y1="${py(0)}" x2="${W-P.r}" y2="${py(0)}" stroke="${ink3}" stroke-width="1.5"/>`;
+const ax=(x,y,t,sub,rot=0,anchor='middle')=>`<text transform="translate(${x} ${y}) rotate(${rot})" text-anchor="${anchor}" font-size="13" font-weight="700" fill="${ink}" letter-spacing=".08em">${t}</text><text transform="translate(${x+(rot?14:0)} ${y+(rot?0:16)}) rotate(${rot})" text-anchor="${anchor}" font-size="12" fill="${ink3}">${sub}</text>`;
+s+=ax(W/2,P.t-30,'EARNS TRUST','shows reasoning · discloses uncertainty · says no');
+s+=ax(W/2,H-P.b+34,'PERFORMS CONFIDENCE','hype · black box · praise');
+s+=ax(22,H/2,'REPORTS TO YOU','shows data, you decide',-90);
+s+=ax(W-36,H/2,'COACHES YOU','prescribes, changes your week',90);
+const cap=(x,y,t,a='start')=>`<text x="${x}" y="${y}" text-anchor="${a}" font-size="12" fill="${ink3}">${t}</text>`;
+s+=cap(P.l+10,py(0)-10,'reports · earns trust')+cap(W-P.r-10,py(0)-10,'coaches · earns trust','end')+cap(P.l+10,py(0)+22,'reports · performs')+cap(W-P.r-10,py(0)+22,'coaches · performs','end');
+const off={"Running Genie":[0,-14,"middle"],"Centr HYROX":[0,20,"middle"],"Nike Run Club":[-12,5,"end"],"HYROX Training+":[-12,5,"end"],"Keiko":[-18,6,"end"],"Oura Advisor":[0,-12,"middle"],"Roxfit":[0,20,"middle"]};
+brands.forEach(([n,x,y,why,k],i)=>{const o=off[n]||[12,5,"start"];
+  s+=k?`<circle class="dot" data-i="${i}" cx="${px(x)}" cy="${py(y)}" r="11" fill="${lime}" stroke="${ink}" stroke-width="2.5"/><text x="${px(x)+o[0]}" y="${py(y)+o[1]}" text-anchor="${o[2]}" font-size="17" font-weight="700" fill="${ink}">${n}</text>`
+     :`<circle class="dot" data-i="${i}" cx="${px(x)}" cy="${py(y)}" r="6.5" fill="${ink3}" stroke="${card}" stroke-width="2"/><text x="${px(x)+o[0]}" y="${py(y)+o[1]}" text-anchor="${o[2]}" font-size="13" fill="${ink}">${n}</text>`;});
+const doc=new DOMParser().parseFromString(`<svg xmlns="http://www.w3.org/2000/svg" id="mapsvg" viewBox="0 0 ${W} ${H}" width="100%" style="display:block;height:auto">${s}</svg>`,'image/svg+xml');
+const node=document.importNode(doc.documentElement,true);
+document.getElementById('mapsvg').replaceWith(node);
+const tip=document.getElementById('tip'),cardEl=document.getElementById('mapcard');
+node.querySelectorAll('.dot').forEach(d=>{
+  d.addEventListener('mousemove',e=>{const b=brands[+d.dataset.i];const r=cardEl.getBoundingClientRect();tip.innerHTML=`<b>${b[0]}</b> <span style="opacity:.6">(${b[1]>0?'+':''}${b[1]}, ${b[2]>0?'+':''}${b[2]})</span><br>${b[3]}`;tip.style.opacity=1;let L=e.clientX-r.left+16,T=e.clientY-r.top+16;if(L+310>r.width)L=e.clientX-r.left-320;tip.style.left=L+'px';tip.style.top=T+'px';});
+  d.addEventListener('mouseleave',()=>tip.style.opacity=0);
+});
+
+/* ---------- trait heatmap ---------- */
+const traits=["Accurate data","Adaptive","Remembers you","Honest / no-hype","Premium","Fun","Social","Scientific","HYROX","Beginner"];
+const rows=[["Keiko","5*","4*","5*",5,3,1,1,3,4,2,true],["Runna",3,3,3,3,2,3,3,2,1,5],["Strava + AI",4,2,3,3,2,4,5,2,1,4],["TrainAsONE",3,5,4,2,1,1,1,4,1,3],["Athletica",4,4,4,3,3,1,2,5,3,2],["Vert.run",3,4,4,4,2,2,4,2,1,3],["Humango",3,4,4,2,2,2,1,3,1,3],["Running Genie",3,3,3,2,1,4,2,3,1,4],["Garmin",5,2,2,2,3,1,2,4,1,4],["COROS",4,2,2,4,4,1,2,3,1,2],["TrainingPeaks",4,2,2,4,5,1,2,4,1,1],["Intervals.icu",5,2,2,5,1,2,4,4,1,1],["Nike Run Club",2,2,2,3,3,5,5,1,1,5],["WHOOP Coach",3,3,3,1,5,2,3,3,2,2],["Oura Advisor",4,3,3,3,4,2,1,3,1,4],["ChatGPT",1,4,1,1,1,3,1,2,2,4],["Roxfit",4,2,2,4,3,2,4,2,5,2],["Centr HYROX",2,2,1,2,4,3,2,2,5,4],["HYROX Training+",2,1,1,3,3,2,3,2,5,3]];
+const shade=v=>{const n=parseInt(v);const a=[0,.06,.16,.32,.55,.85][n];return a<.4?`background:rgba(217,255,122,${a});color:#F2F4EC`:`background:rgba(217,255,122,${a});color:#10120F`;};
+let h='<tr><th>Brand</th>'+traits.map(t=>`<th>${t}</th>`).join('')+'</tr>';
+rows.forEach(r=>{h+=`<tr${r[11]?' class="me"':''}><td${r[11]?' style="font-weight:700"':''}>${r[0]}</td>`+r.slice(1,11).map(v=>`<td><span class="cell" style="${shade(v)}">${v}</span></td>`).join('')+'</tr>';});
+document.getElementById('heat').innerHTML=h;
+
+/* ---------- nav / progress / keys ---------- */
+const slides=[...document.querySelectorAll('section.slide')],dots=document.getElementById('dots');
+const names=["Title","Aha moment","Idea","Positioning","Personality","Archetypes","Map","Map says","Traits","Voice 1","Voice 2","Voice 3","Voice 4","Voice 5","Vocabulary","Palette","Motif","Copy fixes","Plan","Evidence"];
+slides.forEach((sl,i)=>{const a=document.createElement('a');a.href='#'+sl.id;a.innerHTML=`<span>${names[i]||''}</span>`;dots.appendChild(a);});
+const as=[...dots.children];
+function upd(){const y=scrollY+innerHeight*0.4;let cur=0;slides.forEach((sl,i)=>{if(sl.offsetTop<=y)cur=i;});as.forEach((a,i)=>a.classList.toggle('on',i===cur));document.getElementById('prog').style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';}
+addEventListener('scroll',upd,{passive:true});upd();
+addEventListener('keydown',e=>{if(['ArrowDown','PageDown',' ','ArrowRight'].includes(e.key)){e.preventDefault();const i=slides.findIndex(sl=>sl.offsetTop>scrollY+10);if(i>=0)slides[i].scrollIntoView({behavior:'smooth'});}
+ if(['ArrowUp','PageUp','ArrowLeft'].includes(e.key)){e.preventDefault();const prev=[...slides].reverse().find(sl=>sl.offsetTop<scrollY-10);if(prev)prev.scrollIntoView({behavior:'smooth'});}});
+</script>
+</body>
+</html>
